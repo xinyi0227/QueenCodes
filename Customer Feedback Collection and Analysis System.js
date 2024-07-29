@@ -1,16 +1,16 @@
-const NOTION_API_KEY = 'secret_sOpk3HQUqVCS2frhJT5aQFGX8CMBS5fQBayYYfpJkLI'; // Your Notion API key
-const DATABASE_ID = '2d4adcdbb67c4aaa8fcf3b184ff58f99'; // Your Notion database ID
-
 function sendDataToNotion(customerEmail, rating, feedback, type, sentiment) {
+  var notionApiKey = PropertiesService.getScriptProperties().getProperty('NOTION_API_KEY');
+  var databaseId = PropertiesService.getScriptProperties().getProperty('DATABASE_ID');
+
   var url = 'https://api.notion.com/v1/pages';
   var headers = {
-    'Authorization': 'Bearer ' + NOTION_API_KEY,
+    'Authorization': 'Bearer ' + notionApiKey,
     'Content-Type': 'application/json',
     'Notion-Version': '2022-06-28' // Latest Notion API version
   };
 
   var payload = JSON.stringify({
-    parent: { database_id: DATABASE_ID },
+    parent: { database_id: databaseId },
     properties: {
       'Customer Email': {
         title: [
